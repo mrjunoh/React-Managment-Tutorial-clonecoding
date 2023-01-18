@@ -1,0 +1,11 @@
+4강 까지 설명
+index.html에서 
+<div id="root"></div> 부분에 root라는 위치에는 
+1. App.js 안에 있는  App component가 그려지게 된다.
+2. App component가 그릴 내용은 render() return()안에 있는 내용 
+   여기서는 customer class부분이다. 
+3. 그럼 customer.js에 render() return()안에 있는 내용이 화면에 출력된다.
+
+
+만약 화면에 출력해야할 정보가 많으면 
+분리를 하면 된다. 계층적으로 구성해서 각각의 component가 포함하고 있는 내용들을 분리하면되다.
