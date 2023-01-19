@@ -1,7 +1,9 @@
 //import logo from './logo.svg';
 //import React, {Component} from 'react';
+import { Component } from 'react';
 import './App.css';
 import Customer from './components/Customer';
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper } from "@mui/material";
 
 const customers=[{
   'id':1,
@@ -13,7 +15,7 @@ const customers=[{
 },
 {
   'id':2,
-  'image':'https://placeimg.com/64/64/any',
+  'image':'https://placeimg.com/64/64/3',
   'name':'철수',
   'birthday':'13535',
   'gender':'man',
@@ -21,7 +23,7 @@ const customers=[{
 },
 {
   'id':3,
-  'image':'https://placeimg.com/64/64/any',
+  'image':'https://placeimg.com/64/64/2',
   'name':'영희',
   'birthday':'32567',
   'gender':'여자',
@@ -31,23 +33,37 @@ const customers=[{
 
 function App() {
   return (
-    <div>
-      {
-        customers.map(c=>{
-          //c는 그냥 int i같은 변수명인듯?
-          return (<Customer
-            key={c.id} // map을 사용하면 key를 사용해 각 원소를 구별가능한 key를 설정해야한다. 무조건
-            id={c.id}
-            image={c.image}
-            name={c.name}
-            birthday={c.birthday}
-            gender={c.gender}
-            job={c.job}
-            />
-          );
-        })
-      }
-    </div>
+    <Paper>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>번호</TableCell>
+            <TableCell>이미지</TableCell>
+            <TableCell>이름</TableCell>
+            <TableCell>생년월일</TableCell>
+            <TableCell>성별</TableCell>
+            <TableCell>직업</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {
+            customers.map(c=>{
+              //c는 그냥 int i같은 변수명인듯?
+              return (<Customer
+                key={c.id} // map을 사용하면 key를 사용해 각 원소를 구별가능한 key를 설정해야한다. 무조건
+                id={c.id}
+                image={c.image}
+                name={c.name}
+                birthday={c.birthday}
+                gender={c.gender}
+                job={c.job}
+                />
+              );
+            })
+          }
+        </TableBody>
+      </Table>
+    </Paper>
 
     //customer는 우리가 만든 class로 customer의 내용이 출력됨
     //위 예시 name~job까지가 여기서 바로 내용을 추가도가능하다. 이걸 props 프롭스라고 부름
