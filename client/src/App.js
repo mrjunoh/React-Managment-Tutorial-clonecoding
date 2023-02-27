@@ -5,7 +5,7 @@ import './App.css';
 import Customer from './components/Customer';
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
-
+import axios from 'axios';
 import {BrowserView, MobileView} from 'react-device-detect'
 
 
@@ -35,12 +35,24 @@ import {BrowserView, MobileView} from 'react-device-detect'
 // },
 // ];
 
+
+
+
+
 class App extends Component{
+  submitTest = () => {
+    axios.get("http://localhost:5000/api/customers", {}).then(() => {
+        alert("등록 완료!");
+    });
+  };
+  
   state = {
-    customers:""
+    customers:"",
+    //completed: 0 // progressbar는 게이지가 0~100% 까지 있음 
   }
 
   componentDidMount(){
+    //this.timer = setInterval(this.progress, 20);// 0.02초마다 progress함수가 실행되게함
     this.callApi()
       .then(res => this.setState({customers:res}))
       .catch(err => console.log(err));
@@ -51,6 +63,13 @@ class App extends Component{
     const body = await response.json();
     return body;
   }
+
+
+
+  // progress = () =>{// 프로그래스바
+  //   const {completed} = this.state;
+  //   this.setState({completed: completed >=100 ? 0 : completed + 1});
+  //  }
 
   render(){
     return (
@@ -97,7 +116,7 @@ class App extends Component{
   
 }
 
-
+// 원래꺼
 // function App() {
 //   return (
 //     <Paper>
@@ -137,7 +156,6 @@ class App extends Component{
     
 //     //고객이 많아져서 반복문 for문처럼 사용가능한게 "map"이다.
 //     //map안에도 return()안에 내용 넣기
-  
 //   );
 // }
 

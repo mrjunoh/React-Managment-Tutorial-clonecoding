@@ -1,0 +1,32 @@
+const fs = require('fs');
+const data = fs.readFileSync('./database.json'); // 파일을 읽어옴
+const conf = JSON.parse(data);// 환경설정 데이터를 파싱해서 가지고옴
+const mysql = require('mysql');// mysql 라이브러리 불러오기
+
+
+//실제 연결과 관련된 설정
+const connection = mysql.createConnection({ //mysql.createConnection 이부분이 연결을 수행해줌
+  host: conf.host,
+  user: conf.user,
+  password: conf.password,
+  prot: conf.port,
+  database: conf.database
+  //여기 내용물은 속성값으 입력 받는데 다 이미 database.json에 있는 내용으로 conf.내용을 해주었다.
+});
+connection.connect(); // 연결 수행
+
+
+
+app.get('/api/customers', (req,res)=>{
+    // 사용자가 api/customers라는 경로에 접속할 경우 데이터베이스에 접근해서
+    // 쿼리를 날릴 수 있도록 설정해줌
+    // 날리고자 하는 쿼리는 select * from customer 이다.
+    // 즉 customer 테이블에 접근해서 고객의 데이터 정보를 가지고옴
+    // 받은 데이터는 rows라는 변수에 저장됨
+    connection.query(
+      "select * from customer",
+      (err, rows, fields)=>{
+        res.send(rows);
+      }
+    )
+})
